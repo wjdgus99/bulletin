@@ -1,0 +1,35 @@
+<head>
+  <meta charset="utf-8">
+  <title>Blog</title>
+</head>
+<body>
+  <h2 style="display: inline">Post List</h2>
+  <span style="float: right">
+    <a href="{% url 'blog:post_archive' %}">아카이브</a>
+  </span>
+
+
+  <h5 style="margin-bottom:0px">최근 게시글</h5>
+  <hr>
+
+    {% for post in posts %}
+      <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> {{ post.mod_date|date:"N d, Y" }}</li>
+    {% endfor %}
+
+  <br>
+  <div>
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}">이전페이지</a>
+    {% else %}
+      <a href="">이전페이지</a>
+    {% endif %}
+
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">다음페이지</a>
+      {% else %}
+        <a href="">다음페이지</a>
+    {% endif%}
+  </div>
+</body>

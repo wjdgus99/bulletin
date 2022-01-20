@@ -1,0 +1,39 @@
+<head>
+    <meta charset="utf-8">
+    <title>상세 페이지 - {{ object.title }}</title>
+  </head>
+  <body>
+    <p><strong>제목: {{ object.title }}</strong></p>
+
+    <P>{{ object.mod_date|date:"j F Y" }}</P>
+    <br>
+    <br>
+    <div style="background-color: gray">
+      {{ object.content|linebreaks }}
+    </div>
+
+    {% if object.get_previous %}
+    <button type="button">
+    <a href="{{ object.get_previous.get_absolute_url }}" title="이전 글">
+      {{ object.get_previous }}</a>
+    </button>
+    {% else %}
+    <button type="button">
+      <a href=""> 없음 </a>
+        </button>
+    {% endif %}
+    <a href="{% url 'blog:post_list' %}">글 목록</a>
+
+    {% if object.get_next %}
+      <button type="button">
+        <a href="{{ object.get_next.get_absolute_url }}" title="다음 글">
+          {{ object.get_next }} </a>
+          </button>
+    {% else %}
+
+    <button type="button">
+      <a href=""> 끝 </a>
+        </button>
+    {% endif %}
+
+  </body>
