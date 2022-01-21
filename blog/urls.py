@@ -14,4 +14,5 @@ urlpatterns = [
     path('archive/today/', views.PostTAV.as_view(), name = 'post_today'),
 
     path('create/', views.CreatePost.as_view(), name='create_post'),
+    path('update/<int:pk>', views.UpdatePost.as_view(), name='update_post'),
 ]

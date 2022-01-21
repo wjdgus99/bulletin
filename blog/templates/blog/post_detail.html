@@ -14,13 +14,17 @@
     </style>
   </head>
   <body style='width:80%'>
-    <p style='display:inline'><strong>제목: {{ object.title }}</strong></p>
+    <p style='display:inline'>제목:<strong> {{ object.title }}</strong></p>
 
     <p id='date'><{{ object.mod_date|date:"j F Y" }}></p>
     <br>
 
     <div id='content'>
       <p style='background-color: blue; display: inline;'>{{ object.content|linebreaks }}</p>
+    </div>
+
+    <div>
+      <button type="button" style="float:right" onclick=location.href="{% url 'blog:update_post' object.id %}">수정하기</button>
     </div>
 
     {% if object.get_previous %}

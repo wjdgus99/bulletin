@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView, DayArchiveView, TodayArchiveView
 
 from blog.models import Post
@@ -48,3 +48,13 @@ class CreatePost(CreateView):
     model = Post
     fields = ['title', 'content', 'pub_date',]
     template_name = 'blog/create_post.html'
+
+
+class UpdatePost(UpdateView):
+    model = Post
+    fields = ['title', 'content', 'pub_date',]
+    template_name = 'blog/update_post.html'
+
+
+class DeletePost(DeleteView):
+    model = Post
