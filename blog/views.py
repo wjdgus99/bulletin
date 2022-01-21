@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.dates import ArchiveIndexView, YearArchiveView, MonthArchiveView, DayArchiveView, TodayArchiveView
 
@@ -56,5 +56,12 @@ class UpdatePost(UpdateView):
     template_name = 'blog/update_post.html'
 
 
-class DeletePost(DeleteView):
-    model = Post
+# class DeletePost(DeleteView):
+#     model = Post
+#     template_name = 'blog/delete_post.html'
+
+
+def delete(request, pk):
+    post = Post.objects.get(pk=pk)
+    post.delete()
+    return redirect('blog:post_list')

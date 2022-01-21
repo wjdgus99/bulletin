@@ -64,7 +64,7 @@
       <td>{{ post.title }}</td>
       <td id='content'><a href="{{ post.get_absolute_url }}">{% if post.get_content %}{{ post.get_content }}{% else %} --- {% endif %}</a></td>
       <td>{{ post.mod_date|date:"N d, Y" }}</td>
-      <td><button type="button">Delete</button></td>
+      <td><button type="button" onclick=location.href="{% url 'blog:delete' post.id %}">Delete</button></td>
     </tr>
     {% endfor %}
 </table>
