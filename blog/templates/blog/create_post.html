@@ -1,0 +1,12 @@
+
+<head>
+    <meta charset="utf-8">
+    <title>글 쓰기</title>
+  </head>
+  <body>
+      <form action="" method="post" enctype="multipart/form-data">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" value="Upload">
+      </form>
+  </body>

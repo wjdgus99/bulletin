@@ -1,15 +1,26 @@
 <head>
     <meta charset="utf-8">
     <title>상세 페이지 - {{ object.title }}</title>
+    <style>
+      #content{
+        padding-left: 20px;
+        margin: 10px;
+        border: 1px solid black;
+      }
+      #date{
+        float: right;
+        margin: 5px;
+      }
+    </style>
   </head>
-  <body>
-    <p><strong>제목: {{ object.title }}</strong></p>
+  <body style='width:80%'>
+    <p style='display:inline'><strong>제목: {{ object.title }}</strong></p>
 
-    <P>{{ object.mod_date|date:"j F Y" }}</P>
+    <p id='date'><{{ object.mod_date|date:"j F Y" }}></p>
     <br>
-    <br>
-    <div style="background-color: gray">
-      {{ object.content|linebreaks }}
+
+    <div id='content'>
+      <p style='background-color: blue; display: inline;'>{{ object.content|linebreaks }}</p>
     </div>
 
     {% if object.get_previous %}

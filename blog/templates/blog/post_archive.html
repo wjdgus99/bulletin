@@ -1,10 +1,32 @@
 <head>
   <meta charset="utf-8">
   <title>Archive</title>
+  <style>
+    h4#index{
+      display: inline;
+      margin-bottom:0px;
+      padding: 4px;
+    }
+    h4#index:hover{
+      background-color: lightblue;
+    }
+  </style>
 </head>
 <body>
-  <p>Post Archives until {% now "N d, Y" %}</p>
+  <!-- <h3 onclick="location.href='{% url 'blog:post_list' %}'">Post</h3>
+  <p>Post Archives until {% now "N d, Y" %}</p> -->
+  <h2>Archive</h2>
+  <div style='width:80%'>
+  <span style="float: right">
+    <a href="#">마이페이지</a>
+  </span>
 
+
+  <h4 id="index" onclick=location.href="{% url 'blog:post_list' %}">최근 게시글 </h4>
+  <h4 style="display: inline">|</h4>
+  <h4 id="index" style="background-color: lightyellow" onclick=location.href="{% url 'blog:post_archive' %}"> 아카이브 </h4>
+
+  <hr>
   <ul>
     {% for date in date_list %}
     <li>
@@ -20,5 +42,6 @@
       {% endfor %}
     </ul>
   </div>
+</div>
 
 </body>

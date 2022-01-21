@@ -31,5 +31,9 @@ class Post(models.Model):
         return self.get_next_by_mod_date()
 
 
+    def get_content(self):
+        return self.content
+
+
     # def get_next_by_mod_date(self):
     #     return reverse('blog:post_detail', args=[self.id+1])

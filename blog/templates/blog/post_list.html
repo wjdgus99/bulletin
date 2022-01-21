@@ -1,35 +1,91 @@
 <head>
   <meta charset="utf-8">
   <title>Blog</title>
+  <style>
+    table,th,td{
+      border: 2px solid white;
+      border-collapse: collapse;
+      padding: 5px;
+      text-align: center;
+    }
+    th,td{
+      background-color: #FCF3CF ;
+    }
+    table{
+      width: 100%;
+    }
+    td#content{
+      style="width: 60%";
+      text-align: left;
+    }
+    h4#index{
+      display: inline;
+      margin-bottom:0px;
+      padding: 4px;
+    }
+    h4#index:hover{
+      background-color: lightblue;
+    }
+    h3#page{
+      display: inline;
+      padding: 3px;
+    }
+    h3#page > a{
+      text-decoration-line: none;
+    }
+  </style>
 </head>
 <body>
-  <h2 style="display: inline">Post List</h2>
+  <h2>Post List</h2>
+  <div style='width:80%; height:100%;'>
   <span style="float: right">
-    <a href="{% url 'blog:post_archive' %}">아카이브</a>
+    <a href="#">마이페이지</a>
   </span>
 
 
-  <h5 style="margin-bottom:0px">최근 게시글</h5>
+  <h4 id="index" style="background-color: lightyellow" onclick=location.href="{% url 'blog:post_list' %}"> 최근 게시글 </h4>
+  <h4 style="display: inline">|</h4>
+  <h4 id="index" onclick=location.href="{% url 'blog:post_archive' %}"> 아카이브 </h4>
+
+
   <hr>
 
-    {% for post in posts %}
-      <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a> {{ post.mod_date|date:"N d, Y" }}</li>
-    {% endfor %}
+<div style='height:20%'>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Detail</th>
+    <th>Date</th>
+    <th>Delete</th>
+  </tr>
 
+    {% for post in posts %}
+    <tr>
+      <td>{{ post.title }}</td>
+      <td id='content'><a href="{{ post.get_absolute_url }}">{% if post.get_content %}{{ post.get_content }}{% else %} --- {% endif %}</a></td>
+      <td>{{ post.mod_date|date:"N d, Y" }}</td>
+      <td><button type="button">Delete</button></td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
   <br>
-  <div>
+  <div style="text-align: center"> <!-- 페이징 -->
     {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}">이전페이지</a>
+      <h3 id="page"><a href="?page={{ page_obj.previous_page_number }}"> << </a></h3>
     {% else %}
-      <a href="">이전페이지</a>
+      <h3 id="page"><a href=""> -- </a></h3>
     {% endif %}
 
     Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
 
     {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}">다음페이지</a>
+      <h3 id="page"><a href="?page={{ page_obj.next_page_number }}"> >> </a></h3>
       {% else %}
-        <a href="">다음페이지</a>
+        <h3 id="page"><a href=""> -- </a></h3>
     {% endif%}
   </div>
+
+  <button type='button' style='float: right' onclick=location.href="{% url 'blog:create_post' %}">글 쓰기</button>
+</div>
 </body>
